@@ -8,58 +8,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tik_Tak_Reo
+namespace Tic_Only_Self
 {
     public partial class Form1 : Form
     {
-        bool trun=true;
-        int coun=0;
+        bool turn = false;
+        int cout=0;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("By Towle ");
-        }
-
-
-        //exit
-        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+       
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        //butto work
         private void btn_click(object sender, EventArgs e)
         {
-            Button b =(Button)sender;
-            if (trun)
-                b.Text = "X";
+           Button btn = (Button)sender;
+            if (turn)
+                btn.Text = "X";
             else
-                b.Text = "O";
-
-            trun = !trun;
-            b.Enabled = false;
-            checkWiner();
-            coun++;
-          
+                btn.Text = "O";
+           
+            btn.Enabled = false;
+            turn = !turn;
+            cout++;
+            CheckWiner();
         }
 
-
-
-        //CheckWinner horizebtal
-        private void checkWiner()
+        private void CheckWiner()
         {
             bool is_winner = false;
+
+            //Horizental
             if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))
                 is_winner = true;
             else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled))
                 is_winner = true;
             else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (!C1.Enabled))
                 is_winner = true;
+
+
             //vertical
+
             else if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))
                 is_winner = true;
             else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled))
@@ -67,11 +61,11 @@ namespace Tik_Tak_Reo
             else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))
                 is_winner = true;
 
-            //diogram
+            //IS dhaaf
 
             else if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!A1.Enabled))
                 is_winner = true;
-            else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!C1.Enabled))
+            else if ((A3.Text == C2.Text) && (C2.Text == C1.Text) && (!C1.Enabled))
                 is_winner = true;
 
 
@@ -79,48 +73,53 @@ namespace Tik_Tak_Reo
             if (is_winner)
             {
                 string win = "";
-                if (trun)
+                if (turn)
                     win = "O";
                 else
                     win = "X";
                 MessageBox.Show(win + " Winner");
+
             }
             else
             {
-                if (coun ==9)
-                {
-                    MessageBox.Show("Draw");
-                }
+                if (cout == 9)
+                    MessageBox.Show("Draw!");
+
             }
+              
         }
 
-
-        private void disBut()
+        private void dis_but()
         {
             try
             {
                 foreach (Control a in Controls)
                 {
-                    Button b =(Button)a;
+                    Button b = (Button)a;
                     b.Enabled = false;
                 }
             }
-            catch{ }
+            catch { }
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            trun = true;
-            coun = 0;
+            cout=0;
+            turn=false;
             try
             {
                 foreach (Control a in Controls)
                 {
                     Button b = (Button)a;
                     b.Enabled = true;
-                    b.Text = "";               }
+                    b.Text = "";
+                }
             }
             catch { }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Game Design By Towle ! From Youtube lol");
         }
     }
 }

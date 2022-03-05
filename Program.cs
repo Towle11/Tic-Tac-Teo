@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tik_Tak_Reo
+namespace Tic_Only_Self
 {
     internal static class Program
     {
